@@ -1,0 +1,42 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: 'ko'
+
+collections:
+  - name: "gallery"
+    label: "사진첩"
+    folder: "_posts/gallery"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "제목", name: "title", widget: "string"}
+      - {label: "날짜", name: "date", widget: "datetime"}
+      - {label: "카테고리", name: "category", widget: "select", options: ["하나린", "포린이", "교사단", "기타"]}
+      - {label: "대표 사진", name: "thumbnail", widget: "image", required: false}
+      - {label: "내용", name: "body", widget: "markdown"}
+
+  - name: "notice"
+    label: "공지사항"
+    folder: "_posts/notice"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "제목", name: "title", widget: "string"}
+      - {label: "날짜", name: "date", widget: "datetime"}
+      - {label: "내용", name: "body", widget: "markdown"}
+
+  - name: "resources"
+    label: "자료실"
+    folder: "_posts/resources"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "제목", name: "title", widget: "string"}
+      - {label: "날짜", name: "date", widget: "datetime"}
+      - {label: "파일", name: "file", widget: "file", required: false}
+      - {label: "내용", name: "body", widget: "markdown"}

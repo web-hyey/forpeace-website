@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>홈 - 포피스</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>포피스 - Forpeace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:     #2e7d4f;
+      --green-lt:  #e8f5ee;
+      --green-dk:  #1a5c38;
+      --text:      #1a1a1a;
+      --text-sub:  #555;
+      --border:    #ddd;
+      --white:     #fff;
+      --bg:        #f9f9f7;
+      --nav-h:     68px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    /* ── 네비게이션 ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 40px;
+      z-index: 100;
+      gap: 0;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+      font-size: 20px; font-weight: 700;
+      margin-right: auto;
+    }
+
+    .nav-logo .leaf {
+      width: 36px; height: 36px;
+      background: var(--green);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 16px;
+    }
+
+    .nav-links {
+      display: flex; gap: 32px;
+      list-style: none; margin-right: 32px;
+    }
+
+    .nav-links a {
+      text-decoration: none; color: var(--text-sub);
+      font-size: 15px; font-weight: 400;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 2px; background: var(--green);
+      transform: scaleX(0); transition: transform 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .btn-donate {
+      background: var(--green); color: white;
+      padding: 10px 22px; border-radius: 24px;
+      text-decoration: none; font-size: 14px; font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-donate:hover { background: var(--green-dk); transform: translateY(-1px); }
+
+    /* ── 히어로 ── */
+    #hero {
+      margin-top: var(--nav-h);
+      min-height: 580px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .hero-text {
+      padding: 80px 60px;
+      display: flex; flex-direction: column; justify-content: center;
+      background: var(--bg);
+    }
+
+    .hero-text .eyebrow {
+      font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--green); font-weight: 500; margin-bottom: 16px;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px; line-height: 1.15;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .hero-text p {
+      font-size: 16px; color: var(--text-sub);
+      line-height: 1.8; max-width: 380px;
+      margin-bottom: 32px;
+    }
+
+    .btn-main {
+      display: inline-block;
+      background: var(--green); color: white;
+      padding: 14px 32px; border-radius: 6px;
+      text-decoration: none; font-size: 15px; font-weight: 500;
+      align-self: flex-start;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-main:hover { background: var(--green-dk); transform: translateY(-2px); }
+
+    .hero-image {
+      background: var(--green-lt);
+      position: relative; overflow: hidden;
+      min-height: 420px;
+    }
+
+    .hero-image img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+
+    /* 이미지 없을 때 placeholder */
+    .hero-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px; color: var(--green);
+    }
+
+    .hero-placeholder svg { opacity: 0.4; }
+    .hero-placeholder p { font-size: 14px; color: var(--text-sub); }
+
+    /* ── 소개 띠 ── */
+    .intro-strip {
+      background: var(--green);
+      padding: 28px 60px;
+      display: flex; align-items: center; gap: 20px;
+    }
+
+    .intro-strip p {
+      color: white; font-size: 15px; line-height: 1.7;
+      opacity: 0.92;
+    }
+
+    /* ── 섹션 공통 ── */
+    section { padding: 80px 60px; }
+
+    .section-title {
+      font-size: 28px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      color: var(--text-sub); font-size: 15px;
+      margin-bottom: 48px;
+    }
+
+    /* ── 주요 활동 ── */
+    #activities { background: var(--bg); }
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .activity-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .activity-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.09);
+    }
+
+    .card-img {
+      height: 180px;
+      background: var(--green-lt);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
+    }
+
+    .card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+
+    .card-img-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--green); opacity: 0.5; font-size: 13px;
+    }
+
+    .card-body { padding: 20px; }
+
+    .card-tag {
+      display: inline-block;
+      background: var(--green-lt); color: var(--green-dk);
+      padding: 3px 10px; border-radius: 20px;
+      font-size: 12px; font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .card-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .card-body p  { font-size: 14px; color: var(--text-sub); line-height: 1.65; }
+
+    /* ── 자료실 ── */
+    #resources { background: var(--white); }
+
+    .resource-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .resource-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px;
+      border: 1px solid var(--border); border-radius: 8px;
+      text-decoration: none; color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .resource-item:hover {
+      border-color: var(--green); background: var(--green-lt);
+    }
+
+    .resource-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--green-lt); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green); font-size: 18px;
+    }
+
+    .resource-item .name { font-weight: 500; font-size: 15px; }
+    .resource-item .meta { font-size: 13px; color: var(--text-sub); margin-top: 2px; }
+    .resource-item .dl { margin-left: auto; color: var(--green); font-size: 13px; }
+
+    /* ── 알림 (공지) ── */
+    #news { background: var(--bg); }
+
+    .news-list { display: flex; flex-direction: column; gap: 0; }
+
+    .news-item {
+      display: flex; align-items: flex-start; gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none; color: var(--text);
+      transition: color 0.2s;
+    }
+
+    .news-item:hover { color: var(--green); }
+
+    .news-date {
+      flex-shrink: 0; width: 80px;
+      font-size: 13px; color: var(--text-sub); padding-top: 2px;
+    }
+
+    .news-badge {
+      flex-shrink: 0;
+      background: var(--green); color: white;
+      font-size: 11px; padding: 2px 8px; border-radius: 20px;
+      font-weight: 500; margin-top: 3px;
+    }
+
+    .news-title { font-size: 15px; font-weight: 500; }
+
+    /* ── 후원 섹션 ── */
+    #donate {
+      background: var(--green);
+      text-align: center; padding: 80px 60px;
+    }
+
+    #donate h2 { color: white; font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+    #donate p  { color: rgba(255,255,255,0.85); font-size: 16px; margin-bottom: 36px; }
+
+    .btn-donate-lg {
+      display: inline-block;
+      background: white; color: var(--green);
+      padding: 16px 48px; border-radius: 8px;
+      text-decoration: none; font-size: 16px; font-weight: 700;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-donate-lg:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    /* ── 오시는 길 ── */
+    #map-section { background: var(--white); }
+
+    .map-box {
+      width: 100%; height: 320px;
+      background: var(--green-lt);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+      color: var(--text-sub); font-size: 14px;
+      flex-direction: column; gap: 8px;
+    }
+
+    .map-box svg { opacity: 0.4; }
+
+    .address-info {
+      margin-top: 24px; display: flex; gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .address-info dt { font-size: 12px; color: var(--text-sub); margin-bottom: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+    .address-info dd { font-size: 15px; font-weight: 500; }
+
+    /* ── 푸터 ── */
+    footer {
+      background: #111; color: rgba(255,255,255,0.5);
+      padding: 40px 60px;
+      font-size: 13px; line-height: 1.8;
+    }
+
+    footer strong { color: rgba(255,255,255,0.85); display: block; margin-bottom: 8px; font-size: 15px; }
+
+    /* ── 반응형 ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-image { display: none; }
+      .hero-text { padding: 48px 24px; }
+      .hero-text h1 { font-size: 36px; }
+      section { padding: 56px 24px; }
+      .intro-strip { padding: 20px 24px; }
+      footer { padding: 32px 24px; }
+      .address-info { flex-direction: column; gap: 20px; }
+    }
+
+    /* ── 스크롤 애니메이션 ── */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+<!-- 네비게이션 -->
+<nav>
+  <a class="nav-logo" href="#hero">
+    <div class="leaf">🌿</div>
+    포피스
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">홈</a></li>
+    <li><a href="#activities">활동</a></li>
+    <li><a href="#resources">자료실</a></li>
+    <li><a href="#news">알림</a></li>
+    <li><a href="#map-section">오시는 길</a></li>
+  </ul>
+  <a class="btn-donate" href="#donate">후원하기</a>
+</nav>
+
+<!-- 히어로 -->
+<section id="hero">
+  <div class="hero-text">
+    <span class="eyebrow">THE PEACE CORPS FORPEACE</span>
+    <h1>Forpeace</h1>
+    <p>평화교육단체 포피스는 자원봉사단체이며 비영리민간단체입니다.<br>
+       어린이와 청소년들에게 평화의 씨앗을 심는 교육사업과
+       평화의 땅을 일구는 문화사업을 주로 합니다.</p>
+    <a class="btn-main" href="#activities">활동 보기</a>
+  </div>
+  <div class="hero-image">
+    <!-- 실제 사진으로 교체하려면 아래 img 태그 src를 수정하세요 -->
+    <!-- <img src="images/hero.jpg" alt="포피스 활동 사진" /> -->
+    <div class="hero-placeholder">
+      <svg width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+        <path d="m21 15-5-5L5 21"/>
+      </svg>
+      <p>사진을 images/hero.jpg 로 넣어주세요</p>
+    </div>
+  </div>
+</section>
+
+<!-- 소개 띠 -->
+<div class="intro-strip">
+  <p>🌿 포피스는 어린이와 청소년에게 평화의 가치를 전합니다 — 교육사업 · 문화사업 · 자원봉사</p>
+</div>
+
+<!-- 주요 활동 -->
+<section id="activities">
+  <p class="section-title fade-up">주요 활동</p>
+  <p class="section-sub fade-up">포피스가 함께 만들어 가는 평화의 이야기</p>
+  <div class="activity-grid">
+
+    <!-- 활동 카드 1 -->
+    <div class="activity-card fade-up">
+      <div class="card-img">
+        <!-- <img src="images/activity1.jpg" alt="평화 교육" /> -->
+        <div class="card-img-placeholder">
+          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span>사진 추가</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">교육</span>
+        <h3>평화 교육 프로그램</h3>
+        <p>어린이와 청소년들에게 평화의 씨앗을 심는 체험 중심의 교육 활동</p>
+      </div>
+    </div>
+
+    <!-- 활동 카드 2 -->
+    <div class="activity-card fade-up">
+      <div class="card-img">
+        <!-- <img src="images/activity2.jpg" alt="문화 사업" /> -->
+        <div class="card-img-placeholder">
+          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span>사진 추가</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">문화</span>
+        <h3>문화 나눔 사업</h3>
+        <p>평화의 땅을 일구는 다양한 문화 행사 및 체험 프로그램 운영</p>
+      </div>
+    </div>
+
+    <!-- 활동 카드 3 -->
+    <div class="activity-card fade-up">
+      <div class="card-img">
+        <!-- <img src="images/activity3.jpg" alt="자원봉사" /> -->
+        <div class="card-img-placeholder">
+          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span>사진 추가</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">봉사</span>
+        <h3>자원봉사 활동</h3>
+        <p>지역사회와 함께하는 자원봉사 및 커뮤니티 참여 활동</p>
+      </div>
+    </div>
+
+    <!-- 활동 카드 4 (더 추가 가능) -->
+    <div class="activity-card fade-up">
+      <div class="card-img">
+        <div class="card-img-placeholder">
+          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <span>사진 추가</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="card-tag">캠페인</span>
+        <h3>평화 캠페인</h3>
+        <p>평화의 메시지를 전달하는 다양한 캠페인 및 대외 활동</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 자료실 -->
+<section id="resources">
+  <p class="section-title fade-up">자료실</p>
+  <p class="section-sub fade-up">포피스의 자료를 내려받으세요</p>
+  <div class="resource-list fade-up">
+
+    <!-- 자료 항목 — href에 실제 파일 경로를 넣으세요 -->
+    <a class="resource-item" href="files/2024-annual-report.pdf" download>
+      <div class="resource-icon">📄</div>
+      <div>
+        <div class="name">2024년 연간보고서</div>
+        <div class="meta">PDF · 2025.01.15</div>
+      </div>
+      <span class="dl">↓ 다운로드</span>
+    </a>
+
+    <a class="resource-item" href="files/activity-guide.pdf" download>
+      <div class="resource-icon">📋</div>
+      <div>
+        <div class="name">평화 교육 활동 안내서</div>
+        <div class="meta">PDF · 2024.09.01</div>
+      </div>
+      <span class="dl">↓ 다운로드</span>
+    </a>
+
+    <a class="resource-item" href="files/volunteer-apply.hwp" download>
+      <div class="resource-icon">📝</div>
+      <div>
+        <div class="name">자원봉사 신청서</div>
+        <div class="meta">HWP · 2024.03.01</div>
+      </div>
+      <span class="dl">↓ 다운로드</span>
+    </a>
+
+    <!-- 자료를 더 추가하려면 위 블록을 복사해서 붙여넣으세요 -->
+
+  </div>
+</section>
+
+<!-- 알림 / 공지사항 -->
+<section id="news">
+  <p class="section-title fade-up">알림</p>
+  <p class="section-sub fade-up">포피스의 소식을 전합니다</p>
+  <div class="news-list fade-up">
+
+    <a class="news-item" href="#">
+      <span class="news-date">2025.05.20</span>
+      <span class="news-badge">공지</span>
+      <span class="news-title">2025 여름 평화 캠프 참가자 모집 안내</span>
+    </a>
+
+    <a class="news-item" href="#">
+      <span class="news-date">2025.04.10</span>
+      <span class="news-badge">활동</span>
+      <span class="news-title">4월 어린이 평화 교육 프로그램 후기</span>
+    </a>
+
+    <a class="news-item" href="#">
+      <span class="news-date">2025.03.01</span>
+      <span class="news-badge">공지</span>
+      <span class="news-title">2025년 자원봉사자 모집 공고</span>
+    </a>
+
+    <a class="news-item" href="#">
+      <span class="news-date">2025.01.15</span>
+      <span class="news-badge">자료</span>
+      <span class="news-title">2024년 연간보고서 발간</span>
+    </a>
+
+    <!-- 공지를 더 추가하려면 위 블록을 복사해서 붙여넣으세요 -->
+
+  </div>
+</section>
+
+<!-- 후원 -->
+<section id="donate">
+  <h2>함께 평화를 만들어요</h2>
+  <p>여러분의 후원이 어린이들에게 평화의 씨앗이 됩니다</p>
+  <a class="btn-donate-lg" href="#">후원하기</a>
+</section>
+
+<!-- 오시는 길 -->
+<section id="map-section">
+  <p class="section-title fade-up">오시는 길</p>
+  <p class="section-sub fade-up">포피스로 찾아오세요</p>
+
+  <div class="map-box fade-up">
+    <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z"/>
+      <circle cx="12" cy="9" r="2.5"/>
+    </svg>
+    <p>여기에 지도를 삽입하세요<br>
+    (카카오맵 또는 네이버지도 iframe 코드 붙여넣기)</p>
+  </div>
+
+  <!-- 카카오맵 삽입 예시:
+  <iframe src="https://map.kakao.com/link/map/포피스,위도,경도/이름" ...></iframe>
+  -->
+
+  <dl class="address-info fade-up">
+    <div>
+      <dt>주소</dt>
+      <dd>서울시 OO구 OO로 OOO</dd>
+    </div>
+    <div>
+      <dt>전화</dt>
+      <dd>02-000-0000</dd>
+    </div>
+    <div>
+      <dt>이메일</dt>
+      <dd>info@forpeace.kr</dd>
+    </div>
+    <div>
+      <dt>운영시간</dt>
+      <dd>평일 09:00 – 18:00</dd>
+    </div>
+  </dl>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <strong>포피스 (Forpeace)</strong>
+  비영리민간단체 · 자원봉사단체<br>
+  서울시 OO구 OO로 OOO &nbsp;|&nbsp; 대표: OOO &nbsp;|&nbsp; 사업자번호: 000-00-00000<br>
+  Tel. 02-000-0000 &nbsp;|&nbsp; Email. info@forpeace.kr<br><br>
+  © 2025 Forpeace. All rights reserved.
+</footer>
+
+<script>
+  // 스크롤 애니메이션
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
+
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

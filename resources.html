@@ -1,0 +1,21 @@
+---
+layout: base.html
+title: 자료실
+permalink: /resources/
+---
+
+<section style="padding: 80px 60px;">
+  <h2>자료실</h2>
+  <div>
+  {%- for post in collections.resources | reverse -%}
+    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 12px;">
+      <h3>{{ post.data.title }}</h3>
+      <p style="color: #888; font-size: 13px;">{{ post.data.date | date: "%Y. %m. %d." }}</p>
+      {% if post.data.file %}
+        <a href="{{ post.data.file }}" download>📎 파일 다운로드</a>
+      {% endif %}
+      <div>{{ post.content }}</div>
+    </div>
+  {%- endfor -%}
+  </div>
+</section>
