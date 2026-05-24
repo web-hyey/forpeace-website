@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:     #2e7d4f;
+  --green-lt:  #e8f5ee;
+  --green-dk:  #1a5c38;
+  --text:      #1a1a1a;
+  --text-sub:  #555;
+  --border:    #ddd;
+  --bg:        #f9f9f7;
+}
+
+body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); line-height: 1.7; }
+
+/* 네비게이션 */
+nav { position: fixed; top: 0; left: 0; right: 0; height: 68px; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 40px; z-index: 100; }
+.nav-logo { text-decoration: none; color: var(--text); font-size: 20px; font-weight: 700; margin-right: auto; }
+.nav-links { display: flex; gap: 32px; list-style: none; margin-right: 32px; }
+.nav-links a { text-decoration: none; color: var(--text-sub); font-size: 15px; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--green); font-weight: 500; }
+.btn-donate { background: var(--green); color: white; padding: 10px 22px; border-radius: 24px; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+.btn-donate:hover { background: var(--green-dk); }
+
+/* 페이지 헤더 */
+.page-header { margin-top: 68px; padding: 60px; background: var(--bg); text-align: center; }
+.page-header h1 { font-size: 36px; font-weight: 700; margin-bottom: 8px; }
+.page-header p { color: var(--text-sub); font-size: 15px; }
+
+/* 탭 */
+.tabs { display: flex; gap: 8px; justify-content: center; padding: 32px 60px 0; flex-wrap: wrap; }
+.tab { padding: 10px 24px; border-radius: 24px; border: 1px solid var(--border); text-decoration: none; color: var(--text-sub); font-size: 14px; transition: all 0.2s; }
+.tab:hover, .tab.active { background: var(--green); color: white; border-color: var(--green); }
+
+/* 콘텐츠 영역 */
+.content { padding: 40px 60px 80px; max-width: 900px; margin: 0 auto; }
+.content-wide { padding: 40px 60px 80px; }
+
+/* 공지사항 목록 */
+.post-item { display: flex; align-items: flex-start; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text); transition: color 0.2s; }
+.post-item:hover { color: var(--green); }
+.post-date { flex-shrink: 0; width: 100px; font-size: 13px; color: var(--text-sub); padding-top: 2px; }
+.post-title { font-size: 15px; font-weight: 500; }
+
+/* 자료실 목록 */
+.resource-item { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text); margin-bottom: 12px; transition: all 0.2s; }
+.resource-item:hover { border-color: var(--green); background: var(--green-lt); }
+.resource-icon { width: 40px; height: 40px; background: var(--green-lt); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.resource-name { font-weight: 500; font-size: 15px; }
+.resource-date { font-size: 13px; color: var(--text-sub); margin-top: 2px; }
+.resource-dl { margin-left: auto; color: var(--green); font-size: 13px; }
+
+/* 사진첩 그리드 */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+.card { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; text-decoration: none; color: var(--text); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.09); }
+.card-img { height: 180px; background: var(--green-lt); overflow: hidden; }
+.card-img img { width: 100%; height: 100%; object-fit: cover; }
+.card-body { padding: 16px; }
+.card-tag { display: inline-block; background: var(--green-lt); color: var(--green-dk); padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 8px; }
+.card-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.card-date { font-size: 13px; color: var(--text-sub); }
+
+/* 푸터 */
+footer { background: #111; color: rgba(255,255,255,0.5); padding: 40px 60px; font-size: 13px; line-height: 1.8; }
+footer strong { color: rgba(255,255,255,0.85); display: block; margin-bottom: 8px; font-size: 15px; }
+
+/* 반응형 */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .page-header { padding: 40px 24px; }
+  .tabs { padding: 24px 24px 0; }
+  .content, .content-wide { padding: 32px 24px 60px; }
+  footer { padding: 32px 24px; }
+}

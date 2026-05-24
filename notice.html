@@ -1,0 +1,44 @@
+---
+layout: base.html
+title: 공지사항
+permalink: /notice/
+---
+
+<nav>
+  <a class="nav-logo" href="/">🌿 포피스</a>
+  <ul class="nav-links">
+    <li><a href="/">홈</a></li>
+    <li><a href="/gallery/">사진첩</a></li>
+    <li><a href="/notice/" style="color:#2e7d4f; font-weight:500;">공지사항</a></li>
+    <li><a href="/resources/">자료실</a></li>
+  </ul>
+  <a class="btn-donate" href="/#donate">후원하기</a>
+</nav>
+
+<div class="page-header">
+  <h1>알림</h1>
+  <p>포피스의 소식을 전합니다</p>
+</div>
+
+<div class="tabs">
+  <a class="tab active" href="/notice/">공지사항</a>
+  <a class="tab" href="/resources/">자료실</a>
+  <a class="tab" href="/gallery/">사진첩</a>
+</div>
+
+<div class="content">
+  {%- for post in collections.notice | reverse -%}
+  <a class="post-item" href="{{ post.url }}">
+    <span class="post-date">{{ post.data.date }}</span>
+    <span class="post-title">{{ post.data.title }}</span>
+  </a>
+  {%- endfor -%}
+  {%- if collections.notice.size == 0 -%}
+  <p style="text-align:center; color:#888; padding: 60px 0;">등록된 공지사항이 없습니다.</p>
+  {%- endif -%}
+</div>
+
+<footer>
+  <strong>포피스 (Forpeace)</strong>
+  © 2025 Forpeace. All rights reserved.
+</footer>

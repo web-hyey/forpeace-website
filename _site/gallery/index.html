@@ -4,23 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>사진첩 - 포피스</title>
+  <link rel="stylesheet" href="/style.css" />
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   
-<section style="padding: 80px 60px;">
-  <h2>사진첩</h2>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; margin-top: 32px;"><div style="border: 1px solid #ddd; border-radius: 12px; overflow: hidden;">
-      
-        <img src="/images/uploads/img_3176.jpg" style="width: 100%; height: 180px; object-fit: cover;" />
-      
-      <div style="padding: 16px;">
-        <span style="background: #e8f5ee; color: #1a5c38; padding: 3px 10px; border-radius: 20px; font-size: 12px;">하나린</span>
-        <h3 style="margin-top: 10px; font-size: 16px;">테스트 중 입니다.</h3>
-        <p style="color: #888; font-size: 13px;">Sun May 24 2026 14:26:00 GMT+0900 (Korean Standard Time)</p>
+<nav>
+  <a class="nav-logo" href="/">🌿 포피스</a>
+  <ul class="nav-links">
+    <li><a href="/">홈</a></li>
+    <li><a href="/gallery/" class="active">사진첩</a></li>
+    <li><a href="/notice/">공지사항</a></li>
+    <li><a href="/resources/">자료실</a></li>
+  </ul>
+  <a class="btn-donate" href="/#donate">후원하기</a>
+</nav>
+
+<div class="page-header">
+  <h1>사진첩</h1>
+  <p>포피스의 활동 사진을 모아봤어요</p>
+</div>
+
+<div class="tabs">
+  <a class="tab" href="/notice/">공지사항</a>
+  <a class="tab" href="/resources/">자료실</a>
+  <a class="tab active" href="/gallery/">사진첩</a>
+</div>
+
+<div class="content-wide">
+  <div class="grid"><a class="card" href="/_posts/gallery/2026-05-24-테스트-중-입니다/">
+      <div class="card-img">
+        
+          <img src="/images/uploads/img_3176.jpg" alt="테스트 중 입니다." />
+        
       </div>
-    </div></div>
-</section>
+      <div class="card-body">
+        <span class="card-tag">하나린</span>
+        <div class="card-title">테스트 중 입니다.</div>
+        <div class="card-date">Sun May 24 2026 14:26:00 GMT+0900 (Korean Standard Time)</div>
+      </div>
+    </a></div>
+</div>
+
+<footer>
+  <strong>포피스 (Forpeace)</strong>
+  © 2025 Forpeace. All rights reserved.
+</footer>
   <script>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {

@@ -4,20 +4,48 @@ title: 사진첩
 permalink: /gallery/
 ---
 
-<section style="padding: 80px 60px;">
-  <h2>사진첩</h2>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; margin-top: 32px;">
+<nav>
+  <a class="nav-logo" href="/">🌿 포피스</a>
+  <ul class="nav-links">
+    <li><a href="/">홈</a></li>
+    <li><a href="/gallery/" class="active">사진첩</a></li>
+    <li><a href="/notice/">공지사항</a></li>
+    <li><a href="/resources/">자료실</a></li>
+  </ul>
+  <a class="btn-donate" href="/#donate">후원하기</a>
+</nav>
+
+<div class="page-header">
+  <h1>사진첩</h1>
+  <p>포피스의 활동 사진을 모아봤어요</p>
+</div>
+
+<div class="tabs">
+  <a class="tab" href="/notice/">공지사항</a>
+  <a class="tab" href="/resources/">자료실</a>
+  <a class="tab active" href="/gallery/">사진첩</a>
+</div>
+
+<div class="content-wide">
+  <div class="grid">
   {%- for post in collections.gallery | reverse -%}
-    <div style="border: 1px solid #ddd; border-radius: 12px; overflow: hidden;">
-      {% if post.data.thumbnail %}
-        <img src="{{ post.data.thumbnail }}" style="width: 100%; height: 180px; object-fit: cover;" />
-      {% endif %}
-      <div style="padding: 16px;">
-        <span style="background: #e8f5ee; color: #1a5c38; padding: 3px 10px; border-radius: 20px; font-size: 12px;">{{ post.data.category }}</span>
-        <h3 style="margin-top: 10px; font-size: 16px;">{{ post.data.title }}</h3>
-        <p style="color: #888; font-size: 13px;">{{ post.data.date }}</p>
+    <a class="card" href="{{ post.url }}">
+      <div class="card-img">
+        {% if post.data.thumbnail %}
+          <img src="{{ post.data.thumbnail }}" alt="{{ post.data.title }}" />
+        {% endif %}
       </div>
-    </div>
+      <div class="card-body">
+        <span class="card-tag">{{ post.data.category }}</span>
+        <div class="card-title">{{ post.data.title }}</div>
+        <div class="card-date">{{ post.data.date }}</div>
+      </div>
+    </a>
   {%- endfor -%}
   </div>
-</section>
+</div>
+
+<footer>
+  <strong>포피스 (Forpeace)</strong>
+  © 2025 Forpeace. All rights reserved.
+</footer>
